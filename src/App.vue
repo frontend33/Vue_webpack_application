@@ -3,7 +3,10 @@
   <h1>Parent:{{carName}}</h1>
   <app-car
     v-bind:carName="carName"
-    :carYear="carYear">
+    :carYear="carYear"
+    :changeFunc="changeNameToAudi"
+    @changeNameEvent="carName=$event"
+  >
 
   </app-car>
 
@@ -19,6 +22,11 @@ export default {
     return {
      carName: `Ford from parrent`,
       carYear: 2018
+    }
+  },
+  methods:{
+    changeNameToAudi(){
+      this.carName=`Audi`
     }
   }
 
