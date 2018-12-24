@@ -4,11 +4,13 @@
       <p>Year: {{carYear}}</p>
       <button @click="changeName">change Name</button>
       <button @click="changeFunc">change from parrent</button>
+      <button @click="updateCounter">Update</button>
     </div>
 </template>
 
 
 <script>
+  import {eventEmitter} from './main'
   export default {
 //  Можно передать параметры в data и передать параметры из другого файла методом props
 //    props:[`carName`,`carYear`],
@@ -21,12 +23,17 @@
       },
 //      Либо просто указав тип
       carYear:Number,
-      changeFunc: Function
+      changeFunc: Function,
     },
     methods:{
       changeName(){
         this.carName=`Mazda`
         this.$emit(`changeNameEvent`,this.carName)
+      },
+      updateCounter(){
+        // this.$emit("counterUpdated",this.counter+1)
+        // Вторым параметром можем написать на сколько хотим увеличить
+        eventEmitter.$emit('counterUpdated',2)
       }
     },
     computed:{

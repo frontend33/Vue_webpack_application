@@ -1,11 +1,15 @@
 <template>
   <div>
   <h1>Parent:{{carName}}</h1>
+
+  <app-counter></app-counter>
+
   <app-car
     v-bind:carName="carName"
     :carYear="carYear"
     :changeFunc="changeNameToAudi"
     @changeNameEvent="carName=$event"
+
   >
 
   </app-car>
@@ -21,7 +25,7 @@ export default {
   data () {
     return {
      carName: `Ford from parrent`,
-      carYear: 2018
+      carYear: 2018,
     }
   },
   methods:{
