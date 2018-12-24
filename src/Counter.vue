@@ -1,23 +1,19 @@
 <template>
-  <h1>Counter:{{counter}}</h1>
+  <div>
+    <h2>Counter</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, quo.</p>
+  </div>
 </template>
 
 <script>
 import {eventEmitter} from './main'
   export default{
-    data(){
-      return {
-        counter: 0
-      }
-    },
-    // Говорит о том что компонент создан , но при этом еще не заложен в dom дереве
-    created(){
-
-      eventEmitter.$on('counterUpdated',(num)=>{
-        // num передал папаметр 2 что бы всегда увеличивал на 2
-        this.counter+=num
-      })
-    }
-
   }
 </script>
+
+
+<style scoped>
+  h2 {
+    color:red;
+  }
+</style>
