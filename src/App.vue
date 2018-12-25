@@ -1,41 +1,44 @@
 <template>
   <div>
-  <h2 v-colored:background.font="'green'">{{title}}</h2>
-  <h2 v-colored:color.delay="'blue'">{{title}}</h2>
-
-  <h2 v-font-directive>Local font directives</h2>
-  <app-counter></app-counter>
-  <app-car carName="Mazda">
-  <h2 slot="title">{{carName}}</h2>
-  <p slot="name"> Lorem ipsum dolor.</p>
-  </app-car>
+    <h2> {{ title }} </h2>
+    <h2> {{ title |  lowercase }} </h2>
+    <h2> {{ title |  uppercase }} </h2>
+    <!-- Можем применить несколько фильтров
+    <h2> {{ title |  uppercase | lowercase }} </h2>
+    -->
+    <input type="text" v-model="searchName">
+    <ul>
+      <li v-for="name of filtededNames ">{{name}}</li>
+    </ul>
 
   </div>
 </template>
 
-
 <script>
-import Car from './Car.vue'
 
-//  import Car from './Car.vue'
 export default {
-  data(){
+  data() {
     return{
-      carName:'Ford',
       title: "Величие Vue",
+      names:['Kostya','Fedor','Igor','Dima'],
+      searchName: ''
     }
   },
-  components:{
-    appCar: Car
+  computed:{
+    filtededNames(){
+      return this.names.filter(name=>{
+        // Если вся конструкция != -1 , нашли строку name тогда оставляем, если нет удаляем
+        return name.toLowerCase().indexOf(this.searchName.toLowerCase()) !== -1
+      })
+    }
   },
-   directives:{
-    // 'font-directive'
-    fontDirective:{
-      bind(el, bindings,vnode){
-        el.style.fontSize='40px'
-      }
+  // Делаем фильтры
+  filters:{
+    lowercase(value){
+      return value.toLowerCase()
     }
   }
+
 
 }
 
@@ -43,6 +46,6 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 
 </style>
