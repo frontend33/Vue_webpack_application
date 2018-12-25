@@ -4,7 +4,7 @@
 
   <app-counter></app-counter>
 
-  <app-car></app-car>
+  <app-car carName="Mazda"></app-car>
 
   </div>
 </template>
@@ -14,7 +14,7 @@
 //  import Car from './Car.vue'
 export default {
 
-  }
+}
 
 
 
