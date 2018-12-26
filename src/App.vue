@@ -1,42 +1,26 @@
 <template>
   <div>
-    <h2> {{ title }} </h2>
-    <h2> {{ title |  lowercase }} </h2>
-    <h2> {{ title |  uppercase }} </h2>
-    <!-- Можем применить несколько фильтров
-    <h2> {{ title |  uppercase | lowercase }} </h2>
-    -->
-    <input type="text" v-model="searchName">
-    <ul>
-      <li v-for="name of filterdedNames ">{{name}}</li>
-    </ul>
+    <h2>Forms inputs</h2>
+    <input type="text" v-model.lazy="name">
+    <p>{{name}}</p>
 
-
-    <hr>
-
-    <app-list></app-list>
-
+    <!-- textarea -->
+    <h2>TextArea</h2>
+    <textarea v-model="textarea">{{textarea}}</textarea>
+    <p>{{textarea}}</p>
   </div>
 </template>
 
 <script>
 // Используем миксин что бы не повторять код два раза
 
-import listMixin from './listMixin.js'
 export default {
   data() {
     return{
-      title: "Величие Vue",
+      name: "",
+      textarea: 'I am initial text'
     }
   },
-  mixins:[listMixin],
-  // Делаем фильтры
-  filters:{
-    lowercase(value){
-      return value.toLowerCase()
-    }
-  }
-
 
 }
 
@@ -45,5 +29,11 @@ export default {
 </script>
 
 <style scoped>
-
+  textarea {
+    height: 100px;
+    width: 400px;
+  }
+  p{
+    white-space: pre;
+  }
 </style>
