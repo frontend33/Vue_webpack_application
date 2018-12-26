@@ -8,30 +8,28 @@
     -->
     <input type="text" v-model="searchName">
     <ul>
-      <li v-for="name of filtededNames ">{{name}}</li>
+      <li v-for="name of filterdedNames ">{{name}}</li>
     </ul>
+
+
+    <hr>
+
+    <app-list></app-list>
 
   </div>
 </template>
 
 <script>
+// Используем миксин что бы не повторять код два раза
 
+import listMixin from './listMixin.js'
 export default {
   data() {
     return{
       title: "Величие Vue",
-      names:['Kostya','Fedor','Igor','Dima'],
-      searchName: ''
     }
   },
-  computed:{
-    filtededNames(){
-      return this.names.filter(name=>{
-        // Если вся конструкция != -1 , нашли строку name тогда оставляем, если нет удаляем
-        return name.toLowerCase().indexOf(this.searchName.toLowerCase()) !== -1
-      })
-    }
-  },
+  mixins:[listMixin],
   // Делаем фильтры
   filters:{
     lowercase(value){
