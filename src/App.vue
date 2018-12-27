@@ -1,33 +1,104 @@
 <template>
-  <div>
-    <!-- Создаем компонент и добавляем директиву v-model со значением switched
-      по умолчанию передает свойство в компонент свойство называется value в пропсах компонента Onoff.vue
-    -->
-      <app-onoff v-model="switched"></app-onoff>
-      <div>
-        <h3 v-if="switched">Component is enabled</h3>
-        <h3 v-else>Component is disabled</h3>
+  <div class="container">
+    <form class="pt-3">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          :class="{'is-invalid': $v.email.$error}"
+          @blur="$v.email.$touch()"
+          v-model="email"
+          >
+        <!-- Если не правильный валидатор required мы выводим сообщение
+        Все данные храняся в объекте плагина validations:{}
+        Мы обращаемся к определенному контролу и вызываем оперделенные свойства-->
+       <div class="invalid-feedback" v-if="!$v.email.required">
+        Email field is required
       </div>
-  </div>
+      <div class="invalid-feedback" v-if="!$v.email.email">
+        This field should be an email
+      </div>
+      </div>
 
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          :class="{'is-invalid': $v.password.$error}"
+          @blur="$v.password.$touch()"
+          v-model="password"
+          >
+
+        <div class="invalid-feedback" v-if="!$v.password.minLength">
+         Min length of password is  {{$v.password.$params.minLength.min}}. Now it is {{password.length}}
+        </div>
+      </div>
+
+
+
+      <div class="form-group">
+        <label for="confirm">Confirm password</label>
+        <input
+          type="password"
+          id="confirm"
+          class="form-control"
+          :class="{'is-invalid': $v.confirmPassword.$error}"
+          @blur="$v.confirmPassword.$touch()"
+          v-model="confirmPassword"
+          >
+
+        <div class="invalid-feedback" v-if="!$v.confirmPassword.sameAs">
+         Password should match
+        </div>
+
+      </div>
+
+
+
+<!-- :class"{{'is-invalid': $v.email.$error}}" Если есть ошибка мы будем добавлять
+  динамический класс  is-invalid к инпуту-->
+  </form>
+  </div>
 </template>
 
+
+
 <script>
-// Используем миксин что бы не повторять код два раза
-import Onoff from './Onoff.vue'
+import { required,email,minLength,sameAs} from 'vuelidate/lib/validators'
 export default {
+  // Импортируем только нужные валидатор из библиотеки (взят с api vuelidate)
   data() {
     return{
-      switched: false
+      email:'',
+      password:'',
+      confirmPassword:''
     }
   },
-  components:{
-    appOnoff:Onoff
-  },
-  // так могу следить а объектами их значениями и т д
-  watch:{
-    switched(switched){
-      console.log(switched)
+  // Поскольку подключили доп плагин Vuelidate нам доступен новый объект
+  validations:{
+    email:{
+      // В Es 6 если ключ и значение совпадает можно опустить значение оставив только ключ  required:required
+      required,
+      // email:email
+      email
+    },
+    password:{
+      // minLength Функция замыкания передаем то число что будем валидировать
+      minLength:minLength(6)
+    },
+    confirmPassword:{
+      // Передаем строку которая у нас присутствует в инстансе нашей валидации
+      // Благодаря валидатору sameAs можем проверять идентичность контролов
+      // sameAs: sameAs('password')
+      // Можем передать через стрелочную функцию (Если файлы находятся в разных файлах удобнее через vue)
+      sameAs: sameAs((vue)=>{
+        return vue.password
+      })
     }
   }
 
@@ -38,11 +109,5 @@ export default {
 </script>
 
 <style scoped>
-  textarea {
-    height: 100px;
-    width: 400px;
-  }
-  p{
-    white-space: pre;
-  }
+
 </style>
