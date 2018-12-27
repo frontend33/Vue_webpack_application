@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <form class="pt-3">
+    <form class="pt-3" @submit.prevent="onSubmit">
       <div class="form-group">
         <label for="email">Email</label>
         <input
@@ -19,6 +19,9 @@
       </div>
       <div class="invalid-feedback" v-if="!$v.email.email">
         This field should be an email
+      </div>
+      <div class="invalid-feedback" v-if="!$v.email.uniqEmail">
+        This email  is already exists
       </div>
       </div>
 
@@ -55,13 +58,16 @@
         <div class="invalid-feedback" v-if="!$v.confirmPassword.sameAs">
          Password should match
         </div>
-
       </div>
-
-
+      <button
+        class="btn btn-success"
+        type="submit"
+        :disabled="$v.$invalid"
+      >Submit</button>
 
 <!-- :class"{{'is-invalid': $v.email.$error}}" Если есть ошибка мы будем добавлять
   динамический класс  is-invalid к инпуту-->
+  <!-- Проверить валидна ли наша вся форма поможет :disabed="$v.$invalid"-->
   </form>
   </div>
 </template>
@@ -79,13 +85,32 @@ export default {
       confirmPassword:''
     }
   },
+  methods:{
+    onSubmit(){
+      console.log('Email',this.email)
+      console.log('Password',this.password)
+    }
+  },
   // Поскольку подключили доп плагин Vuelidate нам доступен новый объект
   validations:{
     email:{
       // В Es 6 если ключ и значение совпадает можно опустить значение оставив только ключ  required:required
       required,
       // email:email
-      email
+      email,
+      // Что бы выполнить проверку с сервера есть ли эмэйл в базе ,
+      // создаем функцию которая возвращает булевого значения либо промис
+      // uniqEmail:function(newEmail){
+      uniqEmail:(newEmail)=>{
+        // Валидация пустого значения отвечает валидатор  required
+        if(newEmail ==='') return true
+        return new Promise((resolve,reject)=>{
+          setTimeout(() => {
+            const value= newEmail!=='test@mail.ru'
+            resolve(value)
+          }, 1000);
+        })
+      }
     },
     password:{
       // minLength Функция замыкания передаем то число что будем валидировать
