@@ -1,88 +1,35 @@
 <template>
   <div>
-    <h2>Forms inputs</h2>
-    <input type="text" v-model.lazy="name">
-    <p>{{name}}</p>
-
-    <!-- textarea -->
-    <h2>TextArea</h2>
-    <textarea v-model="textarea">{{textarea}}</textarea>
-    <p>{{textarea}}</p>
-
-
-<!-- Все выбранные значения находятся в изначально пустом массиве checkboxSocial-->
-    <label>
-      <input type="checkbox" value="instagram" v-model="checkboxSocial"> Instagram
-    </label>
-
-    <label>
-      <input type="checkbox" value="vk" v-model="checkboxSocial"> Vk
-    </label>
-    <label>
-      <input type="checkbox" value="facebook" v-model="checkboxSocial"> Facebook
-    </label>
-
-    <hr>
-
-    <ul>
-      <li v-for="s in checkboxSocial">{{s}}</li>
-    </ul>
-
-    <hr>
-
-    <!-- В радио кнопках можно выбрать одно значение поэтому в функции data
-      указываем не массив а пустую строку-->
-    <label>
-      <input type="radio" value="instagram" v-model="radioSocial"> Instagram
-    </label>
-
-    <label>
-      <input type="radio" value="vk" v-model="radioSocial"> Vk
-    </label>
-    <label>
-      <input type="radio" value="facebook" v-model="radioSocial"> Facebook
-    </label>
-
-    <hr>
-    <p>{{radioSocial}}</p>
-
-    <!-- Селекты -->
-    <select v-model="social">
-      <option v-for="s in socialList">{{s}}</option>
-    </select>
-    <p>{{social}}</p>
-
-    <input type="text" v-model.number="age">
-    <p>{{age}}</p>
-
+    <!-- Создаем компонент и добавляем директиву v-model со значением switched
+      по умолчанию передает свойство в компонент свойство называется value в пропсах компонента Onoff.vue
+    -->
+      <app-onoff v-model="switched"></app-onoff>
+      <div>
+        <h3 v-if="switched">Component is enabled</h3>
+        <h3 v-else>Component is disabled</h3>
+      </div>
   </div>
-
-
-
 
 </template>
 
 <script>
 // Используем миксин что бы не повторять код два раза
-
+import Onoff from './Onoff.vue'
 export default {
   data() {
     return{
-      name: "",
-      textarea: 'I am initial text',
-      checkboxSocial: ["vk"],
-      radioSocial: '',
-      socialList:["instagram","vk","facebook"],
-      social:"vk",
-      age: 20
+      switched: false
     }
   },
-  watch: {
-      age(val){
-        console.log(val)
-        console.log(typeof val)
-      }
+  components:{
+    appOnoff:Onoff
+  },
+  // так могу следить а объектами их значениями и т д
+  watch:{
+    switched(switched){
+      console.log(switched)
     }
+  }
 
 }
 
