@@ -2,6 +2,7 @@ import VueRouter from 'vue-router'
 import Home from './pages/Home'
 import Cars from './pages/Cars'
 import Car from './pages/Car'
+import CarFull from './pages/CarFull'
 // Экспортируем новый экземпляр класса vueRouter
 export default new VueRouter({
     routes:[
@@ -19,9 +20,17 @@ export default new VueRouter({
       },
       // Что бы сказать vue о том что у нас будет какое то динамическое свойство
       // После слэша будет динамическое свойство
+      // У каждого из объекта routes есть поле children
       {
         path: '/car/:id',
-        component: Car
+        component: Car,
+        children: [
+          {
+            path:'full',  //localhost:8080/car/id/full
+            component:CarFull,
+            name:'carFull'
+          }
+        ]
       }
     ],
     // http://localhost:8080/#/cars чтобы с адреса убрать hash #
