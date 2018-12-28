@@ -4,13 +4,19 @@
 
       <div class="collapse navbar-collapse" >
         <ul class="navbar-nav">
-          <li class="nav-item active">
-            <!-- <router-link> отвечает за  -->
-            <router-link class="nav-link" to="/">Home</router-link>
-          </li>
-          <li class="nav-item">
+          <router-link tag="li" class="nav-link" exact to="/" active-class="active">
+            <a class="nav-link">Home</a>
+          </router-link>
+<!--           <li class="nav-item">
             <router-link class="nav-link" to="/cars">Cars</router-link>
-          </li>
+          </li> -->
+          <!-- У   <router-link> есть специальный параметр
+           tag="И в него передаем в качестве названия тега который хотим использовать"
+          active-class="active" Для выбора активного класса
+         -->
+          <router-link tag="li" class="nav-link" to="/cars" active-class="active">
+            <a class="nav-link">Cars</a>
+          </router-link>
         </ul>
       </div>
     </nav>
