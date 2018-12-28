@@ -1,6 +1,7 @@
 import VueRouter from 'vue-router'
 import Home from './pages/Home'
 import Cars from './pages/Cars'
+import Car from './pages/Car'
 // Экспортируем новый экземпляр класса vueRouter
 export default new VueRouter({
     routes:[
@@ -16,6 +17,12 @@ export default new VueRouter({
         // В качестве компонента передаем что у нас является страницей Home.vue Cars.vue
         component: Cars
       },
+      // Что бы сказать vue о том что у нас будет какое то динамическое свойство
+      // После слэша будет динамическое свойство
+      {
+        path: '/car/:id',
+        component: Car
+      }
     ],
     // http://localhost:8080/#/cars чтобы с адреса убрать hash #
     // Браузер будет сохранять историю разных ссылок

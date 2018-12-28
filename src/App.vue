@@ -17,6 +17,14 @@
           <router-link tag="li" class="nav-link" to="/cars" active-class="active">
             <a class="nav-link">Cars</a>
           </router-link>
+
+        <!-- Добавляем еще два роутера с Car 3 и Car 4 -->
+          <router-link tag="li" class="nav-link" to="/car/3" active-class="active">
+            <a class="nav-link">Car 3</a>
+          </router-link>
+          <router-link tag="li" class="nav-link" to="/car/4" active-class="active">
+            <a class="nav-link">Car 4</a>
+          </router-link>
         </ul>
       </div>
     </nav>
