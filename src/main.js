@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
 // Для регистрации базового роута
-import router from './routes.js'
+import router from './routes'
 
 // Для того что бы подключить любую библиотеку и набор
 // ее функциональности к Vue js достаточно обратиться к глобальной переменной Vue Vue.use()
