@@ -3,22 +3,16 @@
     <h1>Car id {{id}}</h1>
     <button class="btn btn-sm btn-default mb-2" @click="turnBack">Back</button>
     <br>
-  <!--   <router-link
-      class="btn  btn-info mt-2"
-      tag="button"
-      :to="'/car/'+ id + '/full'"
-      >
-      Full info
-      </router-link> -->
+
       <!-- Описываем навигацию к какому роуту нужно обратиться
         вторым параметром params описываем какие параметры необходимо передать в URL
       Используем именованный раут и делать удобную навигацию
       -->
-
+ <!--В query передается параметр который появится в нашей ссылке http://localhost:8080/car/3/full?name=mazda&year=2000 -->
       <router-link
         class="btn  btn-info mt-2"
         tag="button"
-        :to="{name:'carFull',params:{id:id}}"
+        :to="{name:'carFull',params:{id:id}, query:{name:'mazda', year:2000}}"
         >
         Full info
       </router-link>
