@@ -2,6 +2,7 @@ import VueRouter from 'vue-router'
 import Home from './pages/Home'
 import Cars from './pages/Cars'
 import Car from './pages/Car'
+import ErrorCmp from './pages/Error'
 import CarFull from './pages/CarFull'
 // Экспортируем новый экземпляр класса vueRouter
 export default new VueRouter({
@@ -16,7 +17,9 @@ export default new VueRouter({
         // Название домена + / название роута
         path: '/cars',  //localhost:8080/cars
         // В качестве компонента передаем что у нас является страницей Home.vue Cars.vue
-        component: Cars
+        component: Cars,
+        // Добавим имя роуту
+        name:"CarsName"
       },
       // Что бы сказать vue о том что у нас будет какое то динамическое свойство
       // После слэша будет динамическое свойство
@@ -31,15 +34,27 @@ export default new VueRouter({
             name:'carFull'
           }
         ]
+      },
+      {
+        path:'/none',
+        // redirect:'/cars'
+        redirect: {
+          name: "CarsName"
+        }
+      },
+      {
+        path:'*',
+        component:ErrorCmp
       }
     ],
     // http://localhost:8080/#/cars чтобы с адреса убрать hash #
     // Браузер будет сохранять историю разных ссылок
     mode : 'history',
+    // Функция скролит к нужному блоку по id 
     scrollBehavior(to,from,savePosition){
-      console.log(to)
-      console.log(from)
-      console.log(savePosition)
+      if(savePosition){
+        return savePosition
+      }
       if(to.hash){
         return {
           selector:to.hash
