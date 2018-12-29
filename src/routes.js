@@ -35,5 +35,19 @@ export default new VueRouter({
     ],
     // http://localhost:8080/#/cars чтобы с адреса убрать hash #
     // Браузер будет сохранять историю разных ссылок
-    mode : 'history'
+    mode : 'history',
+    scrollBehavior(to,from,savePosition){
+      console.log(to)
+      console.log(from)
+      console.log(savePosition)
+      if(to.hash){
+        return {
+          selector:to.hash
+        }
+      }
+      return {
+        x:0,
+        y:100
+      }
+    }
 })
