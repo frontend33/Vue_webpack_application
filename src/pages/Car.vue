@@ -46,6 +46,15 @@ export default {
     $route(toR, fromR) {
       this.id = toR.params['id']
     }
+  },
+  // Метод beforeRouteLeave метод вызывается перед тем как будем покидать данный роут
+  beforeRouteLeave(to,fromR,next){
+    console.log("beforeRouteLeave")
+    if(window.confirm('are you sure you want to leave?')){
+      next(true)
+    }else{
+      next(false)
+    }
   }
 }
 

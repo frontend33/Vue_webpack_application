@@ -8,15 +8,22 @@
   </div>
 </template>
 <script>
+
 export default {
 	computed:{
 		year(){
 			return this.$route.query.year
 		}
+	},
+	//Можно ставить защиту роутов прямо в компоненте
+	beforeRouteEnter(to,fromR,next){
+		console.log("beforeRouteEnter")
+		next(true)
 	}
 }
 
 </script>
+
 <style scoped>
 	.scroll{
 		width: 100px;

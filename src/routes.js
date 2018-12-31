@@ -31,7 +31,20 @@ export default new VueRouter({
           {
             path:'full',  //localhost:8080/car/id/full
             component:CarFull,
-            name:'carFull'
+            name:'carFull',
+            // Защита роутов мф не продоолжим пока не проверим зареган ли пользователь
+            beforeEnter(to,from,next){
+            	console.log("beforeEnter")
+            	// Если пользователь зареган продолжится роут
+            	if(true){
+            		next(true)
+            	}
+            	// Если нет то прерывает и не дает пройти дальше
+            	else{
+            		next(false)
+            	}
+
+            }
           }
         ]
       },
