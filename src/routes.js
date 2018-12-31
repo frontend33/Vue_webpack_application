@@ -1,9 +1,47 @@
 import VueRouter from 'vue-router'
 import Home from './pages/Home'
-import Cars from './pages/Cars'
-import Car from './pages/Car'
-import ErrorCmp from './pages/Error'
-import CarFull from './pages/CarFull'
+// import Cars from './pages/Cars'
+// import Car from './pages/Car'
+// import ErrorCmp from './pages/Error'
+// import CarFull from './pages/CarFull'
+
+
+// Данная функция будем вызывать только в том случае когда загрузится определенный файл
+//По умолчанию не будет грузится мы lAZY LOAD нашу страницу
+const Cars= resolve=>{
+	//Как мы грузим определенные файлы глоб переменная require Который понимает webpack
+	require.ensure(['./pages/Cars.vue'],()=>{
+		resolve(
+			require('./pages/Cars.vue')
+		)
+	})
+}
+
+const Car= resolve=>{
+	require.ensure(['./pages/Car.vue'],()=>{
+		resolve(
+			require('./pages/Car.vue')
+		)
+	})
+}
+
+const CarFull= resolve=>{
+	require.ensure(['./pages/CarFull.vue'],()=>{
+		resolve(
+			require('./pages/CarFull.vue')
+		)
+	})
+}
+
+const ErrorCmp= resolve=>{
+	require.ensure(['./pages/Error.vue'],()=>{
+		resolve(
+			require('./pages/Error.vue')
+		)
+	})
+}
+
+
 // Экспортируем новый экземпляр класса vueRouter
 export default new VueRouter({
     routes:[
