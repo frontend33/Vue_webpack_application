@@ -1,7 +1,7 @@
 {
   "cars": [
     {
-      "name": "",
+      "name": "bmw",
       "year": 2018,
       "id": 1
     },
@@ -11,9 +11,14 @@
       "id": 2
     },
     {
-      "name": "Mersedec",
+      "name": "Mersedes",
       "year": 2019,
       "id": 3
+    },
+    {
+      "name": "Nissan",
+      "year": 2018,
+      "id": 4
     }
   ]
 }

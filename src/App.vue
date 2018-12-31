@@ -10,7 +10,17 @@
       <input type="text" id="year" class="form-control" v-model.number="carYear">
     </div>
 
-    <div class="btn btn-success" @click="createCar">create Car</div>
+    <div class="btn btn-success" @click="createCars">create Car</div>
+    <div class="btn btn-primary" @click="loadCars">Load Cars</div>
+    <hr>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        v-for="car of cars"
+        :key="car.id"
+        ><strong>{{car.name}}</strong> - {{car.year}}
+      </li>
+    </ul>
   </div>
 </template>
 <script>
@@ -19,11 +29,12 @@ export default {
   data() {
     return {
         carName :"",
-        carYear: 2018
+        carYear: 2018,
+        cars:[]
     }
   },
   methods:{
-    createCar(){
+    createCars(){
       const car={
         name:this.carName,
         year:this.carYear
@@ -39,6 +50,13 @@ export default {
       })
       //Метод post передает нам промис который нужно обработать
 
+    },
+    loadCars(){
+      this.$http.get("http://localhost:3000/cars").then(response=>{
+          return response.json()
+      }).then(cars=>{
+        this.cars=cars
+      })
     }
   }
 }
