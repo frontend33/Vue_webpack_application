@@ -30,8 +30,12 @@ export default {
     return {
         carName :"",
         carYear: 2018,
-        cars:[]
+        cars:[],
+        resource:null
     }
+  },
+  created(){
+      this.resource=this.$resource("http://localhost:3000/cars")
   },
   methods:{
     createCars(){
@@ -39,6 +43,7 @@ export default {
         name:this.carName,
         year:this.carYear
       }
+      /*
       //если хотим отправить и сохранить на сервере используем метод post
       this.$http.post('http://localhost:3000/cars',car).then(response=>{
           // Что бы получить только нужные значения в объекте возвращаем resoponse.json
@@ -48,16 +53,26 @@ export default {
         // В объекте newCar хранятся данные с сервера
         console.log(newCar)
       })
-      //Метод post передает нам промис который нужно обработать
+      используем библиотеку resource
+      */
+      this.resource.save({},car)
+     
 
     },
     loadCars(){
+      /*
       this.$http.get("http://localhost:3000/cars").then(response=>{
           return response.json()
       }).then(cars=>{
         this.cars=cars
       })
-    }
+      */
+      this.resource.get().then(response=>response.json()).then(cars=>{
+        this.cars=cars
+      })
+    },
+    // Используем метод когда компонент уже создан
+   
   }
 }
 
