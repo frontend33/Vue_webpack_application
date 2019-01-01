@@ -35,7 +35,8 @@ export default {
     }
   },
   created(){
-      this.resource=this.$resource("http://localhost:3000/cars")
+      // this.resource=this.$resource("http://localhost:3000/cars") глобально настроили адрес
+      this.resource=this.$resource("cars")
   },
   methods:{
     createCars(){
@@ -71,7 +72,6 @@ export default {
         this.cars=cars
       })
     },
-    // Используем метод когда компонент уже создан
    
   }
 }
