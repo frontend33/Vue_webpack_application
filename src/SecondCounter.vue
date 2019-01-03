@@ -1,12 +1,11 @@
 <template>
-  <h2>Counter {{counter}}</h2>
+  <h2>Second Counter {{counter}}</h2>
   </template>
 <script>
 export default {
  computed:{
  	counter(){
- 		// Обращаемся к стору
- 		// return this.$store.state.counter Только теперь к полю геттерс
+ 		// Обращаемся к стору function getters 
  		return this.$store.getters.computedCounter
  	}
  }

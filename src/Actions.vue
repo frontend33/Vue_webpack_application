@@ -9,7 +9,9 @@ export default {
  methods:{
   updateCounter(val){
     // this.$emit('counerUpdated',val)
-    this.$store.state.counter += val
+    // this.$store.state.counter += val
+    // Используем mutations setter
+    this.$store.commit('changeCounter',val)
   }
  }
 }
