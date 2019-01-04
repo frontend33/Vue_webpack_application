@@ -15,6 +15,17 @@ export default new Vuex.Store({
 			state.counter+=payload
 		}
 	},
+	//для работы с асинхронными запросами
+	actions:{
+		// Можно сделать деконструкцию объекта указав сразу вытаскиваем нужный объект
+		// asyncChangeCouner(context,payload){
+		asyncChangeCouner({commit},payload){
+			setTimeout(function() {
+				// Вызываем функцию которая вызовет mutations и изменит наш state
+				commit("changeCounter",payload.counterValue)
+			}, payload.timeoutStore);
+		}
+	},
 	//Позволяет изменить state и отдать на отрисовку компонентам
 	getters:{
 		computedCounter(state){
