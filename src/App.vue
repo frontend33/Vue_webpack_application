@@ -1,5 +1,7 @@
 <template>
   <div class="container text-center pt-5">
+    <h1>{{title}}</h1>
+    <hr>
    <app-counter></app-counter>
    <app-second-counter></app-second-counter>
    <hr>
@@ -16,6 +18,11 @@ export default {
     appCounter:Counter,
     appActions:Actions,
     appSecondCounter:SecondCounter,
+  },
+  computed:{
+    title(){
+      return this.$store.getters.title
+    }
   }
 
 }
